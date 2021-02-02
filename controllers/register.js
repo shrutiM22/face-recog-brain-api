@@ -1,9 +1,10 @@
 //const handleRegister = (db,bcrypt) => (req,res) => {   // this method is used for fn so that it looks clean and it is adv js
 const handleRegister = (req,res,db,bcrypt) => {
+    const { email,name,password} = req.body;
     if(!name || !email || !password){
         return res.status(400).json('incorrect form submission');
     }
-    const { email,name,password} = req.body;
+
     const hash = bcrypt.hashSync(password);
     db.transaction(trx => {
         trx.insert({
